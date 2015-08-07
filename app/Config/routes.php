@@ -1,4 +1,6 @@
 <?php
+
+//App::uses('QueryStringRoute', 'Route');
 /**
  * Routes configuration
  *
@@ -24,20 +26,28 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
-	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
+//Router::connect('/users/index', array('controller' => 'users', 'action' => 'index', 'index'));
+//Router::connect('/users/register', array('controller' => 'users', 'action' => 'register', 'register'));
+//Router::connect('/users/verify/*', array('controller' => 'users', 'action' => 'verify'), array());
+//Router::connect('/users/login', array('controller' => 'users', 'action' => 'login'));
+//Router::connect('/users/verify/', array('controller' => 'your_controller'), array(
+//    'routeClass' => 'QueryStringRoute', 
+//    'query' => array('specific_key' => 'value')
+//));
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
  */
-	CakePlugin::routes();
+CakePlugin::routes();
 
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use
  * the built-in default routes.
  */
-	require CAKE . 'Config' . DS . 'routes.php';
+require CAKE . 'Config' . DS . 'routes.php';
