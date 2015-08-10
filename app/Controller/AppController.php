@@ -34,26 +34,30 @@ class AppController extends Controller {
     public $components = array(
         'DebugKit.Toolbar',
         'Session',
-//        'Auth' => array(
-//            'loginRedirect' => array(
-//                'controller' => 'posts',
-//                'action' => 'index'
-//            ),
-//            'logoutRedirect' => array(
-//                'controller' => 'pages',
-//                'action' => 'display',
-//                'home'
-//            ),
-//            'authenticate' => array(
-//                'Form' => array(
-//                    'passwordHashed' => 'Blowfish'
-//                )
-//            )
-//        )
+        'Auth' => array(
+            'loginRedirect' => array(
+                'controller' => 'pages',
+                'action' => 'display'
+            ),
+            'logoutRedirect' => array(
+                'controller' => 'pages',
+                'action' => 'display',
+                'home'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => array(
+                        'className' => 'Simple',
+                        'hashType' => 'sha256'
+                    ),
+                    'scope' => array('activate' => 1)
+                )
+            )
+        )
     );
 
-//    public function beforeFilter()
-//    {
-//        $this->Auth->allow('index', 'view');
-//    }
+    public function beforeFilter()
+    {
+        $this->Auth->allow('index', 'view', 'register', 'verify');
+    }
 }

@@ -1,7 +1,13 @@
-<?php echo $this->Form->create(null, array('url'=>'/users/login'));?>
-<h2>Please log in.</h2>
-<?php echo $this->Form->input('User.email') ?>
-<?php echo $this->Form->input('User.password') ?>
-<?php echo $this->Form->submit('login') ?>
-<?php echo $this->Form->error('User.email', $login_error) ?>
-<?php echo $this->Form->end(); ?> 
+<div class="users form">
+<?php echo $this->Session->flash('auth'); ?>
+<?php echo $this->Form->create('User'); ?>
+    <fieldset>
+        <legend>
+            <?php echo __('Please enter your username and password'); ?>
+        </legend>
+        <?php echo $this->Form->input('username');
+        echo $this->Form->input('password');
+    ?>
+    </fieldset>
+<?php echo $this->Form->end(__('Login')); ?>
+</div>

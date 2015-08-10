@@ -7,12 +7,12 @@ class UsersController extends AppController
     
     var $helpers = array('Html', 'Form');
 
-//    public function beforeFilter()
-//    {
-//        parent::beforeFilter();
-//        $this->Auth->allow('add', 'logout');
-//    }
-    
+    public function beforeFilter()
+    {
+        parent::beforeFilter();
+        $this->Auth->allow('add', 'logout');
+    }
+      
     public function register()
     {
         if (!empty($this->data)) {
@@ -22,7 +22,7 @@ class UsersController extends AppController
             if ($this->User->validates()) {
                 $this->User->save($this->data);
                 $this->__sendEmailActive($hash, $this->data['User']);
-                $this->Session->setFlash('Please Check your email for validation Link');
+                $this->Session->setFlash(__('Please Check your email for validation Link'));
                 $this->redirect('/users/login');
                 exit;
             }
@@ -52,42 +52,30 @@ class UsersController extends AppController
             if ($results['User']['activate'] != 1) {
                 if ($results['User']['tokenhash'] == $tokenHash) {
                     $results['User']['activate'] = 1;
-                    //var_dump($results);die;
-                    var_dump($this->User->save($results));die;
-                    $this->Session->setFlash('Your registration is complete: ');
+                    $this->User->save($results['User']);
+                    $this->Session->setFlash(__('Your registration is complete: '));
+                    $this->autoRender = false;
                     $this->redirect('login');
-                    exit;
                 } else {
-                    $this->Session->setFlash('The token does not match');
+                    $this->Session->setFlash(__('The token does not match'));
                     $this->redirect('register');
                 }
             } else {
-                $this->Session->setFlash('Token has alredy been used');
+                $this->Session->setFlash(__('Token has alredy been used'));
                 $this->redirect('register');
             }
         } else {
-            $this->Session->setFlash('There was no token provided for confirmation');
+            $this->Session->setFlash(__('There was no token provided for confirmation'));
             $this->redirect('register');
         }
     }
 
-    public function login()
-    {
-        if (!empty($this->data)) {
-            if ($this->User->validates()) {
-                $this->User->data = $this->data;
-                $results = $this->User->findByEmail($this->data['User']['email']);
-                if ($results['User']['activate'] == 1) {
-                    if ($results && $results['User']['password'] == md5($this->data['User']['password'])) {
-                        $this->Session->write('User', $results['User']);
-                    } else {
-                        $this->Session->setFlash('Invalid Username or Password please try again');
-                    }
-                } else {
-                    $this->User->delete($results['User']['id']);
-                    $this->Session->setFlash('Your Email is not verified. Please verify and try again.');
-                }
+    public function login() {
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                return $this->redirect($this->Auth->redirectUrl());
             }
+            $this->Session->setFlash(__('Invalid username or password, try again'));
         }
     }
 
