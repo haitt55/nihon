@@ -72,5 +72,11 @@ class PagesController extends AppController {
             }
             throw new NotFoundException();
         }
+        
     }
+    
+    public function smarty() {
+        $this->set('smartyFooVar', 'Woo!, it works!');
+    }
+
 }

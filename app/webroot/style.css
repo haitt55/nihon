@@ -1,0 +1,16 @@
+.my_header {
+    color: #27ae60;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: #27ae60;
+    color: #ecf0f1;
+}
+
+.nav > li > a {
+    color: #27ae60;
+}
+
+.error-message {
+    color: #e74c3c;
+}

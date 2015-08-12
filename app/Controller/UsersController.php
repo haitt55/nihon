@@ -1,6 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
+App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
 class UsersController extends AppController
 {
@@ -116,10 +117,11 @@ class UsersController extends AppController
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
         }
-        if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->User->save($this->request->data)) {
+        if ($this->request->is(array('post', 'put'))) {
+            $saved = $this->User->save($this->request->data);
+            if ($saved) {
                 $this->Session->setFlash(__('The user has been saved'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'view', $id));
             }
             $this->Session->setFlash(__('The user could not be saved'));
         } else {
@@ -143,4 +145,51 @@ class UsersController extends AppController
         $this->Session->setFlash(__('User was not deleted'));
         return $this->redirect(array('action' => 'index'));
     }
+    
+    public function change_password($id = null) {
+        $this->User->id = $id;
+        if ($this->request->is(array('post', 'put'))) {
+            $passwordHasher = new SimplePasswordHasher(array('hashType' => 'sha256'));
+            $oldPassword = $passwordHasher->hash($this->request->data['User']['old_password']);
+            $currentUser = $this->User->find('first', array('conditions' => array('password' => $oldPassword)));
+            if ($currentUser) {
+                $saved = $this->User->save($this->request->data);
+                if ($saved) {
+                    $this->Session->setFlash(__('The password has been changed'));
+                    return $this->redirect(array('controller' => 'pages', 'action' => 'display'));
+                }
+                $this->Session->setFlash(__('The user could not be saved'));
+            } else {
+                $this->Session->setFlash(__('Old password is not true'));
+            }
+        } else {
+            $this->request->data = $this->User->findById($id);
+            unset($this->request->data['User']['password']);
+        }
+    }
+    
+    public function forgot_password() {
+        if ($this->request->is(array('post', 'put'))) {
+            unset($this->User->validate["username"]["unique"]);
+            $data = $this->request->data;
+            $this->User->username = $data['User']['username'];
+            $user = $this->User->find('first', array('conditions' => array(
+                    'username' => $data['User']['username'],
+                    'phone_number' => $data['User']['phone_number'])));
+            if ($user) {
+                $user['User']['password'] = $data['User']['password'];
+                $saved = $this->User->save($user);
+                if ($saved) {
+                    $this->Session->setFlash(__('The password has been changed'));
+                    return $this->redirect(array('controller' => 'users', 'action' => 'login'));
+                }
+                $this->Session->setFlash(__('The user could not be saved'));
+            } else {
+                $this->Session->setFlash(__('Invalid user'));
+            }
+        } else {
+            unset($this->request->data['User']['password']);
+        }
+    }
+
 }

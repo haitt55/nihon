@@ -31,12 +31,13 @@ class User extends AppModel {
         'username' => array(
             'required' => array(
                 'rule' => 'notBlank',
-                'message' => 'Username is required'
+                'message' => 'Username is required',
             ),
             'unique' => array(
                 'rule' => 'isUnique',
                 'required' => 'create',
-                'message' => 'This username has used by other user'
+                'message' => 'This username has used by other user',
+                'on' => 'create',
             ),
             'alphanumeric' => array(
                 'rule' => 'alphanumeric'
@@ -56,7 +57,7 @@ class User extends AppModel {
             'equaltofield' => array(
                 'rule' => array('equaltofield', 'password'),
                 'message' => 'Require the same value to password.',
-                'on' => 'create',
+                //'on' => 'create',
             )
         ),
         'email' => array(
@@ -65,6 +66,18 @@ class User extends AppModel {
                 'rule' => 'notBlank',
                 'message' => 'Email is required'
             )
+        ),
+        'phone_number' => array(
+            'phone_no_should_be_numeric' => array(
+                'rule' => 'numeric',
+                'allowEmpty' => true, 
+                'message' => 'Phone number should be numeric')
+        ),
+        'age' => array(
+            'age_no_should_be_numeric' => array(
+                'rule' => 'numeric',
+                'allowEmpty' => true, 
+                'message' => 'Age should be numeric')
         ),
         'login' => array(
             'loginRule-1' => array(
@@ -78,7 +91,7 @@ class User extends AppModel {
         )
     );
     
-    function equaltofield($check,$otherfield)
+    public function equaltofield($check,$otherfield)
     {
         //get name of field
         $fname = '';

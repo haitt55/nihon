@@ -34,15 +34,15 @@ class AppController extends Controller {
     public $components = array(
         'DebugKit.Toolbar',
         'Session',
+        'Common',
         'Auth' => array(
             'loginRedirect' => array(
                 'controller' => 'pages',
                 'action' => 'display'
             ),
             'logoutRedirect' => array(
-                'controller' => 'pages',
-                'action' => 'display',
-                'home'
+                'controller' => 'users',
+                'action' => 'login',
             ),
             'authenticate' => array(
                 'Form' => array(
@@ -55,9 +55,10 @@ class AppController extends Controller {
             )
         )
     );
-
+    
     public function beforeFilter()
     {
-        $this->Auth->allow('index', 'view', 'register', 'verify');
+        $this->set('auth', $this->Auth->user());
+        $this->Auth->allow('login', 'register', 'verify', 'forgot_password');
     }
 }

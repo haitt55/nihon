@@ -1,39 +1,76 @@
-<div class="users view">
-<h2><?php echo __('User'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Name'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['name']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Password'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['password']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Role'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['role']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Status'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['status']); ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit User'), array('action' => 'edit', $user['User']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $user['User']['id']), array(), __('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?> </li>
-	</ul>
+<div class="container">
+    <legend><?php echo __('User Profile'); ?></legend>
+    <div class="row">
+        <div class="col-md-2">
+            <div>
+                <img style="width: 140px; height: 140px;" src="http://besthqimages.mobi/wp-content/uploads/default-profile-picture-png-pictures-2.png" alt="profile's picture" class="img-circle">
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-2 my_header">
+                    <p>Name</p>
+                </div>
+                <div class="col-md-10">
+                    <p><?php echo $user ? $user['User']['first_name'] . ' ' . $user['User']['last_name'] : '' ?></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 my_header">
+                    <p>Username</p>
+                </div>
+                <div class="col-md-10">
+                    <p><?php echo $user ? $user['User']['username'] : '' ?></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 my_header">
+                    <p>Email</p>
+                </div>
+                <div class="col-md-10">
+                    <p><?php echo $user ? $user['User']['email'] : '' ?></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 my_header">
+                    <p>Age</p>
+                </div>
+                <div class="col-md-10">
+                    <p><?php echo $user ? $user['User']['age'] : '' ?></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 my_header">
+                    <p>Phone number</p>
+                </div>
+                <div class="col-md-10">
+                    <p><?php echo $user ? $user['User']['phone_number'] : '' ?></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 my_header">
+                    <p>Address</p>
+                </div>
+                <div class="col-md-10">
+                    <p><?php echo $user ? $user['User']['address'] : '' ?></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 my_header">
+                    <p>Major</p>
+                </div>
+                <div class="col-md-10">
+                    <p><?php echo $user ? $user['User']['major'] : '' ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-md-4"><p><a class="btn btn-success pull-right" href="/users/edit/<?php echo $user['User']['id'] ?>">Edit Profile</a></p></div>
+            <div class="col-md-8">
+            </div>
+        </div>
+    </div>
 </div>
