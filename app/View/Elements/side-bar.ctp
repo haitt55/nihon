@@ -24,8 +24,8 @@
                             class="img-circle">
                     <?php echo $wallet['Wallet']['name']; ?>
                     </a>
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <ul class="dropdown-menu sub-menu">
+                    <span class="glyphicon glyphicon-pencil pull-right" id="option<?php echo $wallet['Wallet']['id']?>"></span>
+                    <ul class=" nav nav-pills dropdown-menu sub-menu">
                         <li><a href="#">Dropdown link</a></li>
                         <li><a href="#">Dropdown link</a></li>
                     </ul>
@@ -41,3 +41,9 @@
         <li><a href="#">Export</a></li>
     </ul>
 </div>
+
+<script>
+    $("#option1").click(function(){
+        $('')
+    });
+</script>
