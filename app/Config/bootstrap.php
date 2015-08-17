@@ -100,6 +100,25 @@ Configure::write('role', array(
     2 => 'user'
 ));
 
+Configure::write('money_type', array(
+    1 => 'USD',
+    2 => 'VND',
+    3 => 'Yen'
+));
+
+Configure::write('category_type', array(
+    1 => 'income',
+    2 => 'expense',
+    3 => 'save'
+));
+
+Configure::write('img_folder', array(
+    'user' => 'img/users/',
+    'wallet' => 'img/wallets/',
+    'category' => 'img/categories/',
+    'money_type' => 'img/money_types/'
+));
+
 Configure::write('site_name', 'nihongo.local');
 Configure::write('email', array(
     'name' => 'haitt55@gmail.com',

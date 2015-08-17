@@ -27,6 +27,14 @@ class User extends AppModel {
         return true;
     }
 
+    public $hasMany = array(
+        'Wallet' => array(
+            'className' => 'Wallet',
+            'foreignKey' => 'user_id',
+        )
+    );
+
+
     public $validate = array(
         'username' => array(
             'required' => array(
@@ -65,7 +73,13 @@ class User extends AppModel {
             'required' => array(
                 'rule' => 'notBlank',
                 'message' => 'Email is required'
-            )
+            ),
+            'unique' => array(
+                'rule' => 'isUnique',
+                'required' => 'create',
+                'message' => 'This email has used by other user',
+                'on' => 'create',
+            ),
         ),
         'phone_number' => array(
             'phone_no_should_be_numeric' => array(
@@ -100,6 +114,5 @@ class User extends AppModel {
             break;
         }
         return $this->data[$this->name][$otherfield] === $this->data[$this->name][$fname];
-    } 
-
+    }
 }

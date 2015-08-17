@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-2">
-            <div class="login-panel panel panel-default">
+            <div class="login-panel panel panel-default modal fade modal-dialog" id="loginModal" role="dialog">
                 <div class="panel-heading">
                     <h3 class="panel-title">Login</h3>
                 </div>
@@ -26,3 +26,9 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(window).load(function(){
+        $('#loginModal').modal('show');
+    });
+</script>

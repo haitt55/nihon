@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Money Lover</a>
+            <a class="navbar-brand" href="/"><i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Money Lover</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">

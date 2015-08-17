@@ -30,7 +30,7 @@ Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
-Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+//Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 //Router::connect('/users/index', array('controller' => 'users', 'action' => 'index', 'index'));
 //Router::connect('/users/register', array('controller' => 'users', 'action' => 'register', 'register'));

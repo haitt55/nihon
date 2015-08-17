@@ -7,6 +7,8 @@
         <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css" />
         <link rel="stylesheet" type="text/css" href="/css/dashboard.css" />
         <link rel="stylesheet" type="text/css" href="/style.css" />
+        
+        <script type="text/javascript" src="/js/jquery.js"></script>
 
         <?php echo $this->Html->charset(); ?>
         <title>
@@ -22,7 +24,9 @@
         <?php echo $this->element('nav-bar', array('auth' => $auth)); ?>
         <div class="container-fluid">
             <div class="row">
-                <?php echo $this->element('side-bar'); ?>
+                <?php echo $this->element('side-bar', array(
+                    'curretWallet' => isset($curretWallet) ? $curretWallet : '',
+                    'allWallets' => isset($allWallets) ? $allWallets : '')); ?>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <div id="container" class="container">
                         <div id="content">
@@ -40,7 +44,6 @@
         </div>
     </div>
 </body>
-    <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </html>
 
