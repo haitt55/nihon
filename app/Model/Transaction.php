@@ -27,10 +27,7 @@ class Transaction extends AppModel
         array(
             'className' => 'Wallet',
             'foreignKey' => 'wallet_id',
-        )
-    );
-    
-    public $belongsTo = array(
+        ),
         'Category' =>
         array(
             'className' => 'Category',

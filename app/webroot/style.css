@@ -19,7 +19,7 @@
     float: left;
     width: 25px;
     height: 25px;
-    margin-top: -2px;
+    margin-top: 5px;
     margin-left: -5px;
     margin-right: 10px;
 }
@@ -94,7 +94,7 @@ body {
     display: block;
 }
 
-.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
+.nav-sidebar .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
     margin-top: 0;
 }
 
