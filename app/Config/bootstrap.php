@@ -120,10 +120,6 @@ Configure::write('img_folder', array(
 ));
 
 Configure::write('site_name', 'nihongo.local');
-Configure::write('email', array(
-    'name' => 'haitt55@gmail.com',
-    'password' => '2545255129041992'
-    ));
 /**
  * Configures default file logging options
  */

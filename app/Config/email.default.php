@@ -44,8 +44,8 @@ class EmailConfig {
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
         'timeout' => 60,
-        'username' => 'trantrantt26@gmail.com',
-        'password' => '29041992',
+        'username' => 'your gmail',
+        'password' => 'your gmail password',
         'transport' => 'Smtp',
     );
      
