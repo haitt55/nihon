@@ -44,16 +44,25 @@
 <script>
 $(document).ready(function() {
     $("#categoryType").change(function() {
-        type = $(this).val();
-        console.log(type);
+        var type = $(this).val();
+        if (type === '<?= Category::INCOME ?>') {
+            url = '<?= Router::Url(['controller' => 'categories', 'action' => 'getCategoryOptions', Category::INCOME], TRUE); ?>';
+        } else if (type === '<?= Category::EXPENSE ?>') {
+            url = '<?= Router::Url(['controller' => 'categories', 'action' => 'getCategoryOptions', Category::EXPENSE], TRUE); ?>';
+        } else if (type === '<?= Category::SAVE ?>') {
+            url = '<?= Router::Url(['controller' => 'categories', 'action' => 'getCategoryOptions', Category::SAVE], TRUE); ?>';
+        } else {
+            url = '';
+        }
+        console.log(url);
         jQuery.ajax({
             type:'POST',
             async: true,
             cache: false,
-            url: '<?= Router::Url(['controller' => 'categories', 'action' => 'getCategoryOptions', ''], TRUE); ?>',
+            url: url,
             success: function(response) {
                 console.log(response);
-                jQuery('#currentWallet').val(response);
+                jQuery('#').val(response);
             },
             data:jQuery('form').serialize()
         });

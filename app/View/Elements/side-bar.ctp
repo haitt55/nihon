@@ -35,7 +35,7 @@
                     $(document).ready(function() {
                         $("#wallet<?php echo $wallet['Wallet']['id']?>").click(function(){
                             jQuery.ajax({
-                                type:'POST',
+                                type:'PUT',
                                 async: true,
                                 cache: false,
                                 url: '<?= Router::Url(['controller' => 'wallets', 'action' => 'changeCurrentWallet', $wallet['Wallet']['id']], TRUE); ?>',

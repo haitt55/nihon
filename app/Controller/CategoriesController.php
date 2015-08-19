@@ -8,6 +8,8 @@ class CategoriesController extends AppController
     public $uses = array('Category');
     
     var $helpers = array('Html', 'Form');
+    
+    var $components = array("RequestHandler");
 
     public function beforeFilter()
     {
@@ -91,6 +93,14 @@ class CategoriesController extends AppController
     public function deleteCategory($id)
     {
         $this->Category->delete($id);
+        $this->autoRender = false;
+    }
+    
+    // Get category options by type for selection 
+    public function getCategoryOptions($type)
+    {
+        $categoryOptions = $this->Category->getCategoryOptions($type);
+        var_dump($categoryOptions);
         $this->autoRender = false;
     }
 }

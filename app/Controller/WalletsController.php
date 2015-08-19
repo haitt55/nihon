@@ -86,15 +86,18 @@ class WalletsController extends AppController
     public function changeCurrentWallet($id = null)
     {
         $wallet['Wallet'] = $this->Wallet->findById($id)['Wallet'];
-        $wallet['Wallet']['default'] = 1;
-        if ($this->Wallet->save($wallet)) {
-            $defaultWallet = $this->Wallet->getDefaultWallet($wallet['Wallet']['user_id']);
-            $defaultWallet['Wallet']['default'] = '';
-            if ($this->Wallet->save($defaultWallet)) {
-                $this->Session->delete('Wallet');
-                $this->Session->write('Wallet', $wallet['Wallet']);
-            }
-        }
+        $defaultWallet = $this->Wallet->getDefaultWallet($wallet['Wallet']['user_id']);
+        $data = array(
+            array('Wallet' => array(
+                'id' => $wallet['Wallet']['id'],
+                'default' => 1)),
+            array('Wallet' => array(
+                'id' => $defaultWallet['Wallet']['id'],
+                'default' => 0)),
+        );
+        $this->Wallet->saveMany($data);
+        $this->Session->delete('Wallet');
+        $this->Session->write('Wallet', $wallet['Wallet']);
         $this->autoRender = false;
     }
     
