@@ -36,7 +36,7 @@ class WalletsController extends AppController
                 }
                 if ($this->Wallet->save($wallet)) {
                     $this->Session->setFlash(__('Wallet has been saved'));
-                    $this->redirect('/');
+                    $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
                 } else {
                     $this->Session->setFlash(__('Wallet has not been saved'));
                     $this->redirect('add');
@@ -70,7 +70,7 @@ class WalletsController extends AppController
                 }
                 if ($this->Wallet->save($wallet)) {
                     $this->Session->setFlash(__('Wallet has been saved'));
-                    $this->redirect('/');
+                    $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
                 } else {
                     $this->Session->setFlash(__('Wallet has not been saved'));
                     $this->redirect('edit');

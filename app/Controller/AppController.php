@@ -3,10 +3,11 @@
 App::uses('Controller', 'Controller');
 App::uses('Wallet', 'Model');
 App::uses('MoneyType', 'Model');
+App::uses('Transaction', 'Model');
 
 class AppController extends Controller {
     
-    public $uses = array('Wallet', 'MoneyType');
+    public $uses = array('Wallet', 'MoneyType', 'Transaction');
 
     public $components = array(
         'DebugKit.Toolbar',
@@ -45,6 +46,8 @@ class AppController extends Controller {
             }
             if ($this->Session->read('Wallet')) {
                 $this->set('curretWallet', $this->Session->read('Wallet'));
+                $transactions = $this->Transaction->getAllTransactions($this->Session->read('Wallet')['id']);
+                $this->set('allTransactions', $transactions);
             }
             if ($this->Wallet->getAllWallets($this->Auth->user('id'))) {
                 $this->set('allWallets', $this->Wallet->getAllWallets($this->Auth->user('id')));

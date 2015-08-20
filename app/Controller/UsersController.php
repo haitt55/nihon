@@ -172,7 +172,7 @@ class UsersController extends AppController
             if ($user) {
                 $this->__sendEmailForgotPassword($user['User']['tokenhash'], $user['User']['email']);
                 $this->Session->setFlash(__('Please check your email for guide'));
-                $this->redirect('/users/login');
+                $this->redirect(array('controller' => 'users', 'action' => 'login'));
                 exit;
             } else {
                 $this->Session->setFlash(__('Invalid user'));

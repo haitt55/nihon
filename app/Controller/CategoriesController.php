@@ -17,6 +17,7 @@ class CategoriesController extends AppController
         $this->set('categoryTypeOptions', $this->Category->getCategoryTypeOptions());
     }
     
+    // category index
     public function index()
     {
         $categories = $this->Category->find('all');
@@ -43,7 +44,7 @@ class CategoriesController extends AppController
                 }
                 if ($this->Category->save($category)) {
                     $this->Session->setFlash(__('Category has been saved'));
-                    $this->redirect('/');
+                    $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
                 } else {
                     $this->Session->setFlash(__('Category has not been saved'));
                     $this->redirect('add');
@@ -77,7 +78,7 @@ class CategoriesController extends AppController
                 }
                 if ($this->Category->save($category)) {
                     $this->Session->setFlash(__('Category has been saved'));
-                    $this->redirect('/');
+                    $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
                 } else {
                     $this->Session->setFlash(__('Category has not been saved'));
                     $this->redirect('add');
@@ -100,7 +101,6 @@ class CategoriesController extends AppController
     public function getCategoryOptions($type)
     {
         $categoryOptions = $this->Category->getCategoryOptions($type);
-        var_dump($categoryOptions);
-        $this->autoRender = false;
+          $this->set(compact("categoryOptions"));
     }
 }
