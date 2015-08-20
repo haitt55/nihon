@@ -3,12 +3,13 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css" />
-        <link rel="stylesheet" type="text/css" href="/css/dashboard.css" />
+        <?php echo $this->Html->css('bootstrap.min'); ?>
+        <?php echo $this->Html->css('bootstrap-theme.min'); ?>
+        <?php echo $this->Html->css('dashboard'); ?>
+        <?php echo $this->Html->css('datepicker'); ?>
         <link rel="stylesheet" type="text/css" href="/style.css" />
         
-        <script type="text/javascript" src="/js/jquery.js"></script>
+        <?php echo $this->Html->script('jquery'); ?>
 
         <?php echo $this->Html->charset(); ?>
         <title>
@@ -44,6 +45,7 @@
         </div>
     </div>
 </body>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<?php echo $this->Html->script('bootstrap-datepicker'); ?>
+<?php echo $this->Html->script('bootstrap.min'); ?>
 </html>
 
