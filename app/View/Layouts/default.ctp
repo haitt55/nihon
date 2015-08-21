@@ -32,7 +32,7 @@
                     <div class="">
                         <div id="content">
 
-                            <?php echo $this->Session->flash(); echo '<br>'; ?>
+                            <?php echo $this->Session->flash(); ?>
                             
                             <?php echo $this->fetch('content'); ?>
                         </div>

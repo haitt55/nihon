@@ -20,6 +20,18 @@ class PagesController extends AppController {
         if (!$this->Session->read('Wallet') && !$this->Wallet->getAllWallets($this->Auth->user('id'))) {
             $this->redirect(array('controller' => 'wallets', 'action' => 'add'));
         }
+        if (!empty($this->request->query)) {
+            $month = $this->request->query['month']['month'];
+            $year = $this->request->query['year']['year'];
+            if (strlen($month) < 2) {
+                $month = '0' . $month;
+            }
+            $yearMonth = $year . '-' . $month;
+            $allTransactions = $this->Transaction->getAllTransactions($this->Session->read('Wallet')['id'], $yearMonth);
+            $this->set('allTransactions', $allTransactions);
+            $this->set('monthValue', $month);
+            $this->set('yearValue', $year);
+        }
         $path = func_get_args();
         try {
             $this->render(implode('/', $path));
@@ -29,7 +41,6 @@ class PagesController extends AppController {
             }
             throw new NotFoundException();
         }
-        
     }
     
 }

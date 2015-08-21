@@ -17,10 +17,12 @@ class Wallet extends AppModel {
         'User' => array(
             'className' => 'User',
             'foreignKey' => 'user_id'
+        ),
+        'MoneyType' => array(
+            'className' => 'MoneyType',
+            'foreignKey' => 'money_type'
         )
     );
-    
-    //public $hasOne = 'MoneyType';
     
     public $hasMany = array(
         'Transaction' => array(
@@ -80,5 +82,42 @@ class Wallet extends AppModel {
                 'Wallet.user_id' => $userId,
                 'Wallet.default' => 1
             )));
+    }
+    
+    // get amount total by category type in a wallet
+    public function getAmountTotal($walletId = null, $categoryType = null)
+    {
+        $amountTotalIncome = 0;
+        if ($walletId) {
+            $data = $this->find('first', array('recursive' => 2, 'conditions' => array(
+                'Wallet.id' => $walletId)));
+        }
+        $amountTotalIncome = $this->calculateAmountTotal($data, $categoryType);
+        return $amountTotalIncome;
+    }
+    
+    // get amount total all wallet by category type
+    public function getAmountTotalAllWallet($userId = null, $categoryType = null)
+    {
+        $allWallets = $this->getAllWallets($userId);
+        $total = 0;
+        foreach ($allWallets as $wallet) {
+            $total += $this->getAmountTotal($wallet['Wallet']['id'], $categoryType);
+        }
+        return $total;
+    }
+
+    // calculate total money
+    public function calculateAmountTotal($data = array(), $categoryType = null)
+    {
+        $total = 0;
+        if ($data['Transaction']) {
+            foreach ($data['Transaction'] as $transaction) {
+                if ($transaction['Category']['type'] == $categoryType) {
+                    $total += $transaction['amount_money'];
+                }
+            }
+        }
+        return $total;
     }
 }
