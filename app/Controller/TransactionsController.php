@@ -53,6 +53,30 @@ class TransactionsController extends AppController
             }
         }
     }
+    
+    // User add new transfer transaction
+    public function transfer() 
+    {  
+        $this->set('walletOptions', $this->Wallet->getWalletOptions($this->Session->read('Wallet')['id'], $this->Auth->user('id')));
+        if ($this->request->is('post')) {
+            $this->Transaction->create();
+            $transaction = $this->request->data;
+            $transaction['Transaction']['category_id'] = 9;
+            if (!$transaction['Transaction']['add_date']) {
+                $transaction['Transaction']['add_date'] = date("Y-m-d");
+            }
+            $transactionOut = $transaction;
+            $transactionOut['Transaction']['wallet_id'] = $this->Session->read('Wallet')['id'];
+            $transactionOut['Transaction']['category_id'] = 7;
+            if ($this->Transaction->saveMany(array($transaction, $transactionOut), array('deep' => true))) {
+                $this->Session->setFlash(__('Transfer  has been saved'));
+                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
+            } else {
+                $this->Session->setFlash(__('Transfer has not been saved'));
+                $this->redirect('transfer');
+            }
+        }
+    }
 
     // User edit existed transaction
     public function edit($id = null)

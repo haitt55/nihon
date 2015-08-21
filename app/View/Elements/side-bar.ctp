@@ -1,4 +1,4 @@
-<div class="col-sm-3 col-md-2 sidebar">
+<div class="col-sm-3 col-md-2 sidebar" id="sidebar<?php echo isset($auth)? $auth['id'] : '' ?>">
     <ul class="nav nav-sidebar">
         <li class="active dropdown">
             <a id="currentWallet" href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
@@ -30,8 +30,8 @@
                             '/'.Configure::read('img_folder.wallet') . 'index.jpeg', array('class' => 'img-circle')); ?>
                     <?php echo $wallet['Wallet']['name']; ?>
                     </a>
-                    <span class="glyphicon glyphicon-pencil pull-right" id="option<?php echo $wallet['Wallet']['id']?>"></span>
-                    <ul class=" nav nav-pills dropdown-menu sub-menu">
+                    <span class="glyphicon glyphicon-pencil pull-right" style=":hover{background-color: #d35400}"></span>
+                    <ul class="dropdown-menu sub-menu">
                         <li><a href="javascript:void(0);">Dropdown link</a></li>
                         <li><a href="javascript:void(0);">Dropdown link</a></li>
                     </ul>
@@ -67,3 +67,13 @@
         <li><a href="javascript:void(0);">Export</a></li>
     </ul>
 </div>
+<script>
+$(document).ready(function() {
+    var userId = $(".sidebar").attr('id').replace('sidebar','');
+    if (userId === "") {
+        $(".sidebar").addClass('hidden');
+    } else {
+        $(".sidebar").removeClass('hidden');
+    }
+}); 
+</script>

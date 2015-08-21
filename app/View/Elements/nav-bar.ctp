@@ -14,10 +14,10 @@
                 <?php if(isset($auth)): ?>
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                            <?php echo $auth['username'] ?>&nbsp;&nbsp;<i class="glyphicon glyphicon-user"></i></a>
+                            <?php echo isset($auth) ? $auth['username'] : '' ?>&nbsp;&nbsp;<i class="glyphicon glyphicon-user"></i></a>
                     <ul class="dropdown-menu" style="min-width: 200px">
                         <li><a href="/users/view/<?php echo $auth['id'] ?>"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Profile</a></li>
-                        <li><a href="/users/change_password/<?php echo $auth['id'] ?>"><i class="glyphicon glyphicon-edit"></i>&nbsp;&nbsp;Change Password</a></li>
+                        <li><a href="/users/change_password/<?php echo isset($auth) ? $auth['id'] : '' ?>"><i class="glyphicon glyphicon-edit"></i>&nbsp;&nbsp;Change Password</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/users/logout"><i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Logout</a></li>
                     </ul>

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-2">
-            <div class="login-panel panel panel-default modal fade modal-dialog" id="loginModal" role="dialog">
+            <div class="login-panel panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Login</h3>
                 </div>
@@ -16,7 +16,7 @@
                             <div class="form-group">
                                 <?php echo $this->Form->input('password', array('id' => 'password', 'class' => 'form-control', 'placeholder' => 'Mật khẩu'))?>
                             </div>
-                            <a href="/users/forgot_password">Forgot password?</a>
+                            <a href="<?= Router::Url(['controller' => 'users', 'action' => 'forgot_password'], TRUE); ?>">Forgot password?</a>
                             <?php echo $this->Form->submit('Login', array('class' => 'btn btn-lg btn-success btn-block')); ?>
                             <?php echo $this->Form->end() ?>
                         </fieldset>
@@ -26,9 +26,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(window).load(function(){
-        $('#loginModal').modal('show');
-    });
-</script>

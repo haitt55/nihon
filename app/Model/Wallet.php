@@ -75,7 +75,7 @@ class Wallet extends AppModel {
         }
     }
     
-    // find wallet default coressponse to current user
+    // Find wallet default coressponse to current user
     public function getDefaultWallet($userId = null)
     {
         return $this->find('first', array('recursive' => -1, 'conditions' => array(
@@ -84,7 +84,7 @@ class Wallet extends AppModel {
             )));
     }
     
-    // get amount total by category type in a wallet
+    // Get amount total by category type in a wallet
     public function getAmountTotal($walletId = null, $categoryType = null)
     {
         $amountTotalIncome = 0;
@@ -96,7 +96,7 @@ class Wallet extends AppModel {
         return $amountTotalIncome;
     }
     
-    // get amount total all wallet by category type
+    // Get amount total all wallet by category type
     public function getAmountTotalAllWallet($userId = null, $categoryType = null)
     {
         $allWallets = $this->getAllWallets($userId);
@@ -107,7 +107,7 @@ class Wallet extends AppModel {
         return $total;
     }
 
-    // calculate total money
+    // Calculate total money
     public function calculateAmountTotal($data = array(), $categoryType = null)
     {
         $total = 0;
@@ -119,5 +119,18 @@ class Wallet extends AppModel {
             }
         }
         return $total;
+    }
+    
+    // Get wallet option for transfer selection
+    public function getWalletOptions($currentWalletId = null, $userId = null) {
+        if ($currentWalletId) {
+            $walletOptions = $this->find('list', array(
+                'fields' => array('Wallet.id', 'Wallet.name'),
+                'recursive' => 0,
+                'conditions' => array('Wallet.user_id' => $userId)
+            ));
+        }
+        unset($walletOptions[$currentWalletId]);
+        return $walletOptions;
     }
 }
