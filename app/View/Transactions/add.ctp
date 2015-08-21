@@ -30,6 +30,30 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-2">
+                        <label class="control-label my_header pull-right">Description</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <?php echo $this->Form->input('description', array('class' => 'form-control', 'label' => false)); ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <label class="control-label my_header pull-right">Date</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <?php echo $this->Form->input('add_date', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'id' => 'datepicker')); ?>
+                    </div>
+                </div>
+                <div class="form-group row hidden" id="person">
+                    <div class="col-sm-2">
+                        <label class="control-label my_header pull-right">Person name</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <?php echo $this->Form->input('person_name', array('class' => 'form-control', 'label' => false)); ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2">
                     </div>
                     <div class="col-sm-4">
                         <?php echo $this->Form->submit('Add Transaction', array('class' => 'btn btn-lg btn-success')); ?>
@@ -43,6 +67,24 @@
 
 <script>
 $(document).ready(function() {
+    $('#datepicker').datepicker({
+        format: "yyyy-mm-dd"
+    });  
+    var change = function (val)
+    {
+        if (val === '1' || val === '2') {
+            $('#person').removeClass('hidden');
+        } else {
+            $('#person').addClass('hidden');
+        }
+    };
+    
+    change($('#categoryOptions').val());
+    
+    $('#categoryOptions').change(function() {
+        change($(this).val());
+    });
+    
     $("#categoryType").change(function() {
         var type = $(this).val();
         if (type === '<?= Category::INCOME ?>') {
@@ -61,8 +103,12 @@ $(document).ready(function() {
             cache: false,
             url: url,
             success: function(response) {
-                console.log(response);
-                jQuery('#').val(response);
+                var data = JSON.parse(response);
+                opt="";
+                for(i in data){
+                  opt+="<option value='"+i+"' >"+data[i]+"</option>";
+                }
+                jQuery('#categoryOptions').html(opt);
             },
             data:jQuery('form').serialize()
         });

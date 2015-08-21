@@ -19,8 +19,18 @@ class TransactionsController extends AppController
     // Transactions index
     public function index()
     {
-//        $transactions = $this->Transaction->find('all');
-//        $this->set('transactions', $transactions);
+        if (!empty($this->request->query)) {
+            $month = $this->request->query['month']['month'];
+            $year = $this->request->query['year']['year'];
+            if (strlen($month) < 2) {
+                $month = '0' . $month;
+            }
+            $yearMonth = $year . '-' . $month;
+            $allTransactions = $this->Transaction->getAllTransactions($this->Session->read('Wallet')['id'], $yearMonth);
+            $this->set('allTransactions', $allTransactions);
+            $this->set('monthValue', $month);
+            $this->set('yearValue', $year);
+        }
     }
 
     // User add new transaction
