@@ -60,15 +60,6 @@ li > ul > li {
     color: #e74c3c;
 }
 
-.modal-dialog {
-    width: 100%;
-}
-
-.modal {
-    overflow-y: auto;
-}
-
-
 body {
     padding-top: 60px;
     padding-bottom: 40px;

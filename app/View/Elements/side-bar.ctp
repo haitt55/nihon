@@ -30,14 +30,23 @@
                             '/'.Configure::read('img_folder.wallet') . 'index.jpeg', array('class' => 'img-circle')); ?>
                     <?php echo $wallet['Wallet']['name']; ?>
                     </a>
-                    <span class="glyphicon glyphicon-pencil pull-right" style=":hover{background-color: #d35400}"></span>
-                    <ul class="dropdown-menu sub-menu">
+                    <span class="glyphicon glyphicon-pencil pull-right" id="option<?php echo $wallet['Wallet']['id'] ?>"></span>
+                    <ul class="dropdown-menu submenu hidden" id="sub-menu<?php echo $wallet['Wallet']['id'] ?>">
                         <li><a href="javascript:void(0);">Dropdown link</a></li>
                         <li><a href="javascript:void(0);">Dropdown link</a></li>
                     </ul>
                 </li>
                 <script>
                     $(document).ready(function() {
+                        $("#option<?php echo $wallet['Wallet']['id']?>").click(function(){
+                            $(".submenu").addClass('hiden');
+                            $("#sub-menu<?php echo $wallet['Wallet']['id']?>").removeClass('hidden');
+//                            $("#sub-menu<?php echo $wallet['Wallet']['id']?>").css("margin-top", "-100px solid transparent");
+//                            $("#sub-menu<?php echo $wallet['Wallet']['id']?>").css("left", "10px");
+//                            $("#sub-menu<?php echo $wallet['Wallet']['id']?>").css("border-top", "6px solid transparent");
+//                            $("#sub-menu<?php echo $wallet['Wallet']['id']?>").css("border-top", "6px solid transparent");
+                        });
+                        
                         $("#wallet<?php echo $wallet['Wallet']['id']?>").click(function(){
                             jQuery.ajax({
                                 type:'PUT',
@@ -77,3 +86,8 @@ $(document).ready(function() {
     }
 }); 
 </script>
+<style>
+.glyphicon-pencil:hover {
+    cursor: pointer;
+}
+</style>
