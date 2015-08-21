@@ -1,5 +1,5 @@
 <div class="">
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Categories
                 <a class="btn btn-success pull-right" href="<?= Router::Url(['controller' => 'categories', 'action' => 'add']); ?>" style="margin-top: -8px;">Add Category</a>
