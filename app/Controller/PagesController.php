@@ -17,6 +17,13 @@ class PagesController extends AppController {
     
     // Display home page
     public function display() {
+        $monthOptions = array();
+        for ($i = 1; $i <= 12; $i++) {
+            $monthOptions[$i] = $i;
+        }
+        $yearOptions = array(date('Y')-1 => date('Y')-1, date('Y') => date('Y'), date('Y')+1 => date('Y')+1);
+        $this->set('monthOptions', $monthOptions);
+        $this->set('yearOptions', $yearOptions);
         if (!$this->Session->read('Wallet') && !$this->Wallet->getAllWallets($this->Auth->user('id'))) {
             $this->redirect(array('controller' => 'wallets', 'action' => 'add'));
         }

@@ -63,13 +63,6 @@ class AppController extends Controller {
         } else {
             $this->set('auth', null);
         }
-        $monthOptions = array();
-        for ($i = 1; $i <= 12; $i++) {
-            $monthOptions[$i] = $i;
-        }
-        $yearOptions = array(date('Y')-1 => date('Y')-1, date('Y') => date('Y'), date('Y')+1 => date('Y')+1);
-        $this->set('monthOptions', $monthOptions);
-        $this->set('yearOptions', $yearOptions);
         $this->set('moneyTypeOptions', $this->MoneyType->getMoneyTypeOptions());
         $this->Auth->allow('login', 'register', 'verify', 'forgot_password', 'reset_password');
     }
