@@ -119,27 +119,6 @@ Configure::write('img_folder', array(
     'money_type' => 'img/money_types/'
 ));
 
-Configure::write('month', array(
-    1 => 1,
-    2 => 2,
-    3 => 3,
-    4 => 4,
-    5 => 5,
-    6 => 6,
-    7 => 7,
-    8 => 8,
-    9 => 9,
-    10 => 10,
-    11 => 11,
-    12 => 12,
-));
-
-Configure::write('year', array(
-    2014 => 2014,
-    2015 => 2015,
-    2016 => 2016,
-));
-
 Configure::write('site_name', 'nihongo.local');
 /**
  * Configures default file logging options
