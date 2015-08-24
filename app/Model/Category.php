@@ -49,14 +49,16 @@ class Category extends AppModel
     public function getCategoryOptions($type = null) 
     {
         if ($type) {
-            $categories = $this->find('all', array('recursive' => -1, 'conditions' => array(
-            'Category.type' => $type)));
+            $categoryOptions = $this->find('list', array(
+                'fields' => array('Category.id', 'Category.name'),
+                'recursive' => 0,
+                'conditions' => array('Category.type' => $type)
+            ));
         } else {
-            $categories = $this->find('all', array('recursive' => -1));
-        }
-        $categoryOptions = array();
-        foreach ($categories as $category) {
-            $categoryOptions[$category['Category']['id']] = $category['Category']['name'];
+            $categoryOptions = $this->find('list', array(
+                'fields' => array('Category.id', 'Category.name'),
+                'recursive' => 0,
+            ));
         }
         $categoryOptions[0] = '-- Please choose --';
         return $categoryOptions;
