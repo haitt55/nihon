@@ -5,7 +5,7 @@ App::uses('AppController', 'Controller');
 class WalletsController extends AppController
 {
     var $helpers = array('Html', 'Form');
-
+    
     public function beforeFilter()
     {
         parent::beforeFilter();
@@ -104,7 +104,9 @@ class WalletsController extends AppController
     // Delete wallet using ajax
     public function deleteWallet($id)
     {
-        $this->Wallet->delete($id);
+        if($this->request->is('delete')){
+            $this->Wallet->delete($id);
+        }
         $this->autoRender = false;
     }
     

@@ -93,7 +93,9 @@ class CategoriesController extends AppController
     // Delete category using ajax
     public function deleteCategory($id)
     {
-        $this->Category->delete($id);
+        if($this->request->is('delete')){
+            $this->Category->delete($id);
+        }
         $this->autoRender = false;
     }
     

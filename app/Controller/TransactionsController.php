@@ -112,7 +112,9 @@ class TransactionsController extends AppController
     // Delete transaction using ajax
     public function deleteTransaction($id)
     {
-        $this->Transaction->delete($id);
+        if($this->request->is('delete')){
+            $this->Transaction->delete($id);
+        }
         $this->autoRender = false;
     }
 }
