@@ -55,25 +55,35 @@ class TransactionsController extends AppController
     }
     
     // User add new transfer transaction
-    public function transfer() 
+    public function transfer($walletId) 
     {  
-        $this->set('walletOptions', $this->Wallet->getWalletOptions($this->Session->read('Wallet')['id'], $this->Auth->user('id')));
+        $amountTotalWallet = $this->Wallet->getAmountTotal($walletId, 1) - $this->Wallet->getAmountTotal($walletId, 2);
+        $this->Transaction->validator()->add('amount_money', 'maxValue', array(
+            'rule' => array('range', 0, $amountTotalWallet),
+            'message' => 'Please enter amount money less than ' . $amountTotalWallet
+        ));
+        $this->set('walletOptions', $this->Wallet->getWalletOptions($walletId, $this->Auth->user('id')));
         if ($this->request->is('post')) {
-            $this->Transaction->create();
-            $transaction = $this->request->data;
-            $transaction['Transaction']['category_id'] = 9;
-            if (!$transaction['Transaction']['add_date']) {
-                $transaction['Transaction']['add_date'] = date("Y-m-d");
-            }
-            $transactionOut = $transaction;
-            $transactionOut['Transaction']['wallet_id'] = $this->Session->read('Wallet')['id'];
-            $transactionOut['Transaction']['category_id'] = 7;
-            if ($this->Transaction->saveMany(array($transaction, $transactionOut), array('deep' => true))) {
-                $this->Session->setFlash(__('Transfer  has been saved'));
-                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
+            $this->Transaction->set($this->request->data);
+            if ($this->Transaction->validates()) {
+                $this->Transaction->create();
+                $transaction = $this->request->data;
+                $transaction['Transaction']['category_id'] = 9;
+                if (!$transaction['Transaction']['add_date']) {
+                    $transaction['Transaction']['add_date'] = date("Y-m-d");
+                }
+                $transactionOut = $transaction;
+                $transactionOut['Transaction']['wallet_id'] = $walletId;
+                $transactionOut['Transaction']['category_id'] = 7;
+                if ($this->Transaction->saveMany(array($transaction, $transactionOut), array('deep' => true))) {
+                    $this->Session->setFlash(__('Transfer  has been saved'));
+                    $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
+                } else {
+                    $this->Session->setFlash(__('Transfer has not been saved'));
+                    $this->redirect(array('controller' => 'transactions', 'action' => 'transfer', $walletId));
+                }
             } else {
-                $this->Session->setFlash(__('Transfer has not been saved'));
-                $this->redirect('transfer');
+                $errors = $this->Transaction->validationErrors;
             }
         }
     }

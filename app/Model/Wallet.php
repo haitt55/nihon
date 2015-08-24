@@ -87,13 +87,13 @@ class Wallet extends AppModel {
     // Get amount total by category type in a wallet
     public function getAmountTotal($walletId = null, $categoryType = null)
     {
-        $amountTotalIncome = 0;
+        $amountTotal = 0;
         if ($walletId) {
             $data = $this->find('first', array('recursive' => 2, 'conditions' => array(
                 'Wallet.id' => $walletId)));
         }
-        $amountTotalIncome = $this->calculateAmountTotal($data, $categoryType);
-        return $amountTotalIncome;
+        $amountTotal = $this->calculateAmountTotal($data, $categoryType);
+        return $amountTotal;
     }
     
     // Get amount total all wallet by category type

@@ -27,7 +27,39 @@
         </div>
         <div class="panel-body">
             <table class="table table-hover">
+                <?php
+                $income = 0;
+                $expense = 0;
+                    foreach ($allTransactions as $date => $transactionByDate) {
+                        foreach ($transactionByDate as $transaction) {
+                            if ($transaction['Category']['type'] == 1) {
+                                $income += $transaction['Transaction']['amount_money'];
+                            }
+                            if ($transaction['Category']['type'] == 2) {
+                                $expense += $transaction['Transaction']['amount_money'];
+                            }
+                        }
+                    }
+                ?>
                 <thead>
+                    <tr>
+                        <td>
+                            <table width="100%">
+                                <tr>
+                                    <td>Income:</td>
+                                    <td class="text-info"><?php echo $income ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Expense:</td>
+                                    <td class="text-danger"><?php echo $expense ?></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><?php echo $income - $expense ?></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($allTransactions as $date => $transactionByDate) : ?>
@@ -46,6 +78,15 @@
                                         <?php echo $transaction['Transaction']['description'] ? $transaction['Transaction']['description'] : '' ?>
                                     </td>
                                     <td style="width:20%">
+                                        <?php 
+                                        if ($transaction['Category']['id'] == 1) {
+                                            echo "Borrow from";
+                                        } elseif ($transaction['Category']['id'] == 2) {
+                                            echo "Lend to";
+                                        } else {
+                                            echo '';
+                                        }
+                                        ?>
                                         <?php echo $transaction['Transaction']['person_name'] ? $transaction['Transaction']['person_name'] : '' ?>
                                     </td>
                                     <td style="width:20%"><?php echo $transaction['Transaction']['amount_money'] ? $transaction['Transaction']['amount_money'] : '' ?></td>
