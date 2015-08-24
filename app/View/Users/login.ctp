@@ -16,7 +16,7 @@
                             <div class="form-group">
                                 <?php echo $this->Form->input('password', array('id' => 'password', 'class' => 'form-control', 'placeholder' => 'Mật khẩu'))?>
                             </div>
-                            <a href="<?= Router::Url(['controller' => 'users', 'action' => 'forgot_password'], TRUE); ?>">Forgot password?</a>
+                            <a href="<?php echo Router::Url(['controller' => 'users', 'action' => 'forgot_password'], TRUE); ?>">Forgot password?</a>
                             <?php echo $this->Form->submit('Login', array('class' => 'btn btn-lg btn-success btn-block')); ?>
                             <?php echo $this->Form->end() ?>
                         </fieldset>

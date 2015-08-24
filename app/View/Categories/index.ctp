@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Categories
-                <a class="btn btn-success pull-right" href="<?= Router::Url(['controller' => 'categories', 'action' => 'add']); ?>" style="margin-top: -8px;">Add Category</a>
+                <a class="btn btn-success pull-right" href="<?php echo Router::Url(['controller' => 'categories', 'action' => 'add']); ?>" style="margin-top: -8px;">Add Category</a>
             </h3>
         </div>
         <div class="panel-body">
@@ -27,7 +27,7 @@
                     <td><?php echo $category['Category']['type'] ? $category['Category']['type'] : '' ?></td>
                     <td><?php echo $category['Category']['photo'] ? $category['Category']['photo'] : '' ?></td>
                     <td class="text-center">
-                        <a class="btn btn-warning" href="<?= Router::Url(['controller' => 'categories', 'action' => 'edit', $category['Category']['id']]); ?>">
+                        <a class="btn btn-warning" href="<?php echo Router::Url(['controller' => 'categories', 'action' => 'edit', $category['Category']['id']]); ?>">
                             <span class="glyphicon glyphicon-edit"></span>
                         </a>
                         <a class="btn btn-danger" id="delete<?php echo $category['Category']['id'] ?>">
@@ -42,10 +42,10 @@
                             type:'DELETE',
                             async: true,
                             cache: false,
-                            url: '<?= Router::Url(['controller' => 'categories', 'action' => 'deleteCategory', $category['Category']['id']], TRUE); ?>',
+                            url: '<?php echo Router::Url(['controller' => 'categories', 'action' => 'deleteCategory', $category['Category']['id']], TRUE); ?>',
                             success: function(response) {
                                 console.log(response);
-                                window.location = '<?= Router::Url(['controller' => 'categories', 'action' => 'index'], TRUE); ?>';
+                                window.location = '<?php echo Router::Url(['controller' => 'categories', 'action' => 'index'], TRUE); ?>';
                                 jQuery('#currentWallet').val(response);
                             },
                             data:jQuery('form').serialize()

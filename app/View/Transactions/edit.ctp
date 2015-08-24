@@ -79,12 +79,12 @@ $(document).ready(function() {
     
     var getCategories = function (type)
     {
-        if (type === '<?= Category::INCOME ?>') {
-            url = '<?= Router::Url(['controller' => 'categories', 'action' => 'getCategoryOptions', Category::INCOME], TRUE); ?>';
-        } else if (type === '<?= Category::EXPENSE ?>') {
-            url = '<?= Router::Url(['controller' => 'categories', 'action' => 'getCategoryOptions', Category::EXPENSE], TRUE); ?>';
-        } else if (type === '<?= Category::SAVE ?>') {
-            url = '<?= Router::Url(['controller' => 'categories', 'action' => 'getCategoryOptions', Category::SAVE], TRUE); ?>';
+        if (type === '<?php echo Category::INCOME ?>') {
+            url = '<?php echo Router::Url(['controller' => 'categories', 'action' => 'getCategoryOptions', Category::INCOME], TRUE); ?>';
+        } else if (type === '<?php echo Category::EXPENSE ?>') {
+            url = '<?php echo Router::Url(['controller' => 'categories', 'action' => 'getCategoryOptions', Category::EXPENSE], TRUE); ?>';
+        } else if (type === '<?php echo Category::SAVE ?>') {
+            url = '<?php echo Router::Url(['controller' => 'categories', 'action' => 'getCategoryOptions', Category::SAVE], TRUE); ?>';
         } else {
             url = '';
         }

@@ -22,7 +22,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Transactions
-                <a class="btn btn-success pull-right" href="<?= Router::Url(['controller' => 'transactions', 'action' => 'add']); ?>" style="margin-top: -8px;">Add Transaction</a>
+                <a class="btn btn-success pull-right" href="<?php echo Router::Url(['controller' => 'transactions', 'action' => 'add']); ?>" style="margin-top: -8px;">Add Transaction</a>
             </h3>
         </div>
         <div class="panel-body">
@@ -91,7 +91,7 @@
                                     </td>
                                     <td style="width:20%"><?php echo $transaction['Transaction']['amount_money'] ? $transaction['Transaction']['amount_money'] : '' ?></td>
                                     <td class="text-center" style="width:20%">
-                                        <a class="btn btn-warning" href="<?= Router::Url(['controller' => 'transactions', 'action' => 'edit', $transaction['Transaction']['id']]); ?>">
+                                        <a class="btn btn-warning" href="<?php echo Router::Url(['controller' => 'transactions', 'action' => 'edit', $transaction['Transaction']['id']]); ?>">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>
                                         <a class="btn btn-danger" id="delete<?php echo $transaction['Transaction']['id'] ?>">
@@ -106,10 +106,10 @@
                                             type:'DELETE',
                                             async: true,
                                             cache: false,
-                                            url: '<?= Router::Url(['controller' => 'transactions', 'action' => 'deleteTransaction', $transaction['Transaction']['id']], TRUE); ?>',
+                                            url: '<?php echo Router::Url(['controller' => 'transactions', 'action' => 'deleteTransaction', $transaction['Transaction']['id']], TRUE); ?>',
                                             success: function(response) {
                                                 console.log(response);
-                                                window.location = '<?= Router::Url(['controller' => 'transactions', 'action' => 'index'], TRUE); ?>';
+                                                window.location = '<?php echo Router::Url(['controller' => 'transactions', 'action' => 'index'], TRUE); ?>';
                                             },
                                             data:jQuery('form').serialize()
                                         });

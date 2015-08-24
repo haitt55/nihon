@@ -17,7 +17,7 @@
             </a>
             <ul class="dropdown-menu" style="min-width: 100%">
                 <li>
-                    <a href="<?= Router::Url(['controller' => 'wallets', 'action' => 'total'], TRUE); ?>">
+                    <a href="<?php echo Router::Url(['controller' => 'wallets', 'action' => 'total'], TRUE); ?>">
                         <?php echo $this->Html->image('/'.Configure::read('img_folder.wallet') . 'index.jpeg', array('class' => 'img-circle')); ?>
                         <b style="float:left">Total&nbsp;</b>
                         <h5 class="text-warning" style="margin-top:2px"><?php echo $amountTotalAllWallet; ?></h5>
@@ -32,9 +32,9 @@
                     </a>
                     <span class="glyphicon glyphicon-pencil pull-right" id="option<?php echo $wallet['Wallet']['id'] ?>"></span>
                     <ul class="dropdown-menu submenu hidden" id="sub-menu<?php echo $wallet['Wallet']['id'] ?>" style="z-index: 300">
-                        <li><a href="<?= Router::Url(['controller' => 'wallets', 'action' => 'edit', $wallet['Wallet']['id']], TRUE); ?>">Edit</a></li>
+                        <li><a href="<?php echo Router::Url(['controller' => 'wallets', 'action' => 'edit', $wallet['Wallet']['id']], TRUE); ?>">Edit</a></li>
                         <li><a href="javascript:void(0);" id="deleteWallet<?php echo $wallet['Wallet']['id'] ?>">Delete</a></li>
-                        <li><a href="<?= Router::Url(['controller' => 'transactions', 'action' => 'transfer', $wallet['Wallet']['id']], TRUE); ?>">Transfer</a></li>
+                        <li><a href="<?php echo Router::Url(['controller' => 'transactions', 'action' => 'transfer', $wallet['Wallet']['id']], TRUE); ?>">Transfer</a></li>
                     </ul>
                 </li>
                 <script>
@@ -51,10 +51,10 @@
                                 type:'DELETE',
                                 async: true,
                                 cache: false,
-                                url: '<?= Router::Url(['controller' => 'wallets', 'action' => 'deleteWallet', $wallet['Wallet']['id']], TRUE); ?>',
+                                url: '<?php echo Router::Url(['controller' => 'wallets', 'action' => 'deleteWallet', $wallet['Wallet']['id']], TRUE); ?>',
                                 success: function(response) {
                                     console.log(response);
-                                    window.location = '<?= Router::Url(['controller' => 'pages', 'action' => 'display', 'home'], TRUE); ?>';
+                                    window.location = '<?php echo Router::Url(['controller' => 'pages', 'action' => 'display', 'home'], TRUE); ?>';
                                 },
                                 data:jQuery('form').serialize()
                             });
@@ -65,10 +65,10 @@
                                 type:'PUT',
                                 async: true,
                                 cache: false,
-                                url: '<?= Router::Url(['controller' => 'wallets', 'action' => 'changeCurrentWallet', $wallet['Wallet']['id']], TRUE); ?>',
+                                url: '<?php echo Router::Url(['controller' => 'wallets', 'action' => 'changeCurrentWallet', $wallet['Wallet']['id']], TRUE); ?>',
                                 success: function(response) {
                                     console.log(response);
-                                    window.location = '<?= Router::Url(['controller' => 'pages', 'action' => 'display', 'home'], TRUE); ?>';
+                                    window.location = '<?php echo Router::Url(['controller' => 'pages', 'action' => 'display', 'home'], TRUE); ?>';
                                 },
                                 data:jQuery('form').serialize()
                             });
@@ -78,13 +78,13 @@
                 </script>
                 <?php endforeach; ?>
                 <li role="separator" class="divider"></li>
-                <li><a href="<?= Router::Url(['controller' => 'wallets', 'action' => 'add'], TRUE); ?>"><i class="glyphicon glyphicon-plus"></i>&nbsp;&nbsp;<b class="my_success">Add Wallet</b></a></li>
+                <li><a href="<?php echo Router::Url(['controller' => 'wallets', 'action' => 'add'], TRUE); ?>"><i class="glyphicon glyphicon-plus"></i>&nbsp;&nbsp;<b class="my_success">Add Wallet</b></a></li>
             </ul>
         </li>
-        <li><a href="<?= Router::Url(['controller' => 'transactions', 'action' => 'index'], TRUE); ?>">Transactions</a></li>
+        <li><a href="<?php echo Router::Url(['controller' => 'transactions', 'action' => 'index'], TRUE); ?>">Transactions</a></li>
         <li><a href="javascript:void(0);">Depts</a></li>
         <li><a href="javascript:void(0);">Loans</a></li>
-        <li><a href="<?= Router::Url(['controller' => 'categories', 'action' => 'index'], TRUE); ?>">Categories</a></li>
+        <li><a href="<?php echo Router::Url(['controller' => 'categories', 'action' => 'index'], TRUE); ?>">Categories</a></li>
         <li><a href="javascript:void(0);">Export</a></li>
     </ul>
 </div>
