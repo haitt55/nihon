@@ -113,9 +113,9 @@ Configure::write('category_type', array(
 ));
 
 Configure::write('img_folder', array(
-    'user' => 'img/users/',
-    'wallet' => 'img/wallets/',
-    'category' => 'img/categories/',
+    'user'       => 'img/users/',
+    'wallet'     => 'img/wallets/',
+    'category'   => 'img/categories/',
     'money_type' => 'img/money_types/'
 ));
 
@@ -126,11 +126,11 @@ Configure::write('site_name', 'nihongo.local');
 App::uses('CakeLog', 'Log');
 CakeLog::config('debug', array(
     'engine' => 'File',
-    'types' => array('notice', 'info', 'debug'),
-    'file' => 'debug',
+    'types'  => array('notice', 'info', 'debug'),
+    'file'   => 'debug',
 ));
 CakeLog::config('error', array(
     'engine' => 'File',
-    'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
-    'file' => 'error',
+    'types'  => array('warning', 'error', 'critical', 'alert', 'emergency'),
+    'file'   => 'error',
 ));

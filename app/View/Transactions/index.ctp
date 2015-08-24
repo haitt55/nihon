@@ -30,16 +30,16 @@
                 <?php
                 $income = 0;
                 $expense = 0;
-                    foreach ($allTransactions as $date => $transactionByDate) {
-                        foreach ($transactionByDate as $transaction) {
-                            if ($transaction['Category']['type'] == 1) {
+                    foreach ($allTransactions as $date => $transactionByDate) :
+                        foreach ($transactionByDate as $transaction) :
+                            if ($transaction['Category']['type'] == 1) :
                                 $income += $transaction['Transaction']['amount_money'];
-                            }
-                            if ($transaction['Category']['type'] == 2) {
+                            endif;
+                            if ($transaction['Category']['type'] == 2) :
                                 $expense += $transaction['Transaction']['amount_money'];
-                            }
-                        }
-                    }
+                            endif;
+                        endforeach;
+                    endforeach;
                 ?>
                 <thead>
                     <tr>
@@ -79,13 +79,13 @@
                                     </td>
                                     <td style="width:20%">
                                         <?php 
-                                        if ($transaction['Category']['id'] == 1) {
+                                        if ($transaction['Category']['id'] == 1) :
                                             echo "Borrow from";
-                                        } elseif ($transaction['Category']['id'] == 2) {
+                                        elseif ($transaction['Category']['id'] == 2) :
                                             echo "Lend to";
-                                        } else {
+                                        else :
                                             echo '';
-                                        }
+                                        endif;
                                         ?>
                                         <?php echo $transaction['Transaction']['person_name'] ? $transaction['Transaction']['person_name'] : '' ?>
                                     </td>
