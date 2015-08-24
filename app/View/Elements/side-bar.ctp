@@ -1,4 +1,4 @@
-<div class="col-sm-3 col-md-2 sidebar" id="sidebar<?php echo isset($auth)? $auth['id'] : '' ?>">
+<div class="col-sm-3 col-md-2 sidebar"  style="z-index: 200" id="sidebar<?php echo isset($auth)? $auth['id'] : '' ?>">
     <ul class="nav nav-sidebar">
         <li class="active dropdown">
             <a id="currentWallet" href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
@@ -31,22 +31,35 @@
                     <?php echo $wallet['Wallet']['name']; ?>
                     </a>
                     <span class="glyphicon glyphicon-pencil pull-right" id="option<?php echo $wallet['Wallet']['id'] ?>"></span>
-                    <ul class="dropdown-menu submenu hidden" id="sub-menu<?php echo $wallet['Wallet']['id'] ?>">
-                        <li><a href="javascript:void(0);">Dropdown link</a></li>
-                        <li><a href="javascript:void(0);">Dropdown link</a></li>
+                    <ul class="dropdown-menu submenu hidden" id="sub-menu<?php echo $wallet['Wallet']['id'] ?>" style="z-index: 300">
+                        <li><a href="<?= Router::Url(['controller' => 'wallets', 'action' => 'edit', $wallet['Wallet']['id']], TRUE); ?>">Edit</a></li>
+                        <li><a href="javascript:void(0);" id="deleteWallet<?php echo $wallet['Wallet']['id'] ?>">Delete</a></li>
+                        <li><a href="<?= Router::Url(['controller' => 'transactions', 'action' => 'transfer', $wallet['Wallet']['id']], TRUE); ?>">Transfer</a></li>
                     </ul>
                 </li>
                 <script>
                     $(document).ready(function() {
                         $("#option<?php echo $wallet['Wallet']['id']?>").click(function(){
-                            $(".submenu").addClass('hiden');
+                            $(".submenu").addClass('hidden');
                             $("#sub-menu<?php echo $wallet['Wallet']['id']?>").removeClass('hidden');
-//                            $("#sub-menu<?php echo $wallet['Wallet']['id']?>").css("margin-top", "-100px solid transparent");
-//                            $("#sub-menu<?php echo $wallet['Wallet']['id']?>").css("left", "10px");
-//                            $("#sub-menu<?php echo $wallet['Wallet']['id']?>").css("border-top", "6px solid transparent");
-//                            $("#sub-menu<?php echo $wallet['Wallet']['id']?>").css("border-top", "6px solid transparent");
+                            $("#sub-menu<?php echo $wallet['Wallet']['id']?>").parent().css({position: 'relative'});
+                            $("#sub-menu<?php echo $wallet['Wallet']['id']?>").css({top: 0, left: 30, position:'relative'});
+
                         });
-                        
+                        $("#deleteWallet<?php echo $wallet['Wallet']['id'] ?>").click(function(){
+                            jQuery.ajax({
+                                type:'DELETE',
+                                async: true,
+                                cache: false,
+                                url: '<?= Router::Url(['controller' => 'wallets', 'action' => 'deleteWallet', $wallet['Wallet']['id']], TRUE); ?>',
+                                success: function(response) {
+                                    console.log(response);
+                                    window.location = '<?= Router::Url(['controller' => 'pages', 'action' => 'display', 'home'], TRUE); ?>';
+                                },
+                                data:jQuery('form').serialize()
+                            });
+                         return false;
+                         });
                         $("#wallet<?php echo $wallet['Wallet']['id']?>").click(function(){
                             jQuery.ajax({
                                 type:'PUT',
@@ -56,7 +69,6 @@
                                 success: function(response) {
                                     console.log(response);
                                     window.location = '<?= Router::Url(['controller' => 'pages', 'action' => 'display', 'home'], TRUE); ?>';
-                                    jQuery('#currentWallet').val(response);
                                 },
                                 data:jQuery('form').serialize()
                             });

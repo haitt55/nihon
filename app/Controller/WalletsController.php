@@ -101,4 +101,11 @@ class WalletsController extends AppController
         $this->autoRender = false;
     }
     
+    // Delete wallet using ajax
+    public function deleteWallet($id)
+    {
+        $this->Wallet->delete($id);
+        $this->autoRender = false;
+    }
+    
 }
